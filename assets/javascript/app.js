@@ -1,3 +1,4 @@
+$(document).ready(function () {
 var options = [
 	{
 		question: "Pupusas, handmade thick stuffed corn tortillas, are a traditional dish from what country?", 
@@ -50,14 +51,58 @@ var options = [
 
 var correctCount = 0;
 var wrongCount = 0;
-var timer = 20;
+var timer = 10;
 var intervalID;
+var userGuess ="";
 
+//click start button to start game
+$("#start").on("click", function () {
+		$("#start").hide();
+		displayQuestion();
+	})
+//timer function
 function runTimer(){
 	intervalID = setInterval(function () {
 		timer --;
 		$("#timeleft").html("<h3>Time remaining: " + timer + "</h3>");
-		}, 1000)}
+		//stop timer if reach 0
+		if (timer === 0) {
+		clearInterval(intervalID);
+		}
+		}, 1000)
+	
+}
+
+//randomly pick question in array if not already shown
+//display question and loop though and display possible answers
+function displayQuestion() {
+	var pick = options[Math.floor(Math.random()*options.length)]
+	if (pick.shown) {
+		displayQuestion();
+	} else {
+		$("#questionblock").html("<h2>" + pick.question + "</h2>");
+		for(var i = 0; i < pick.choice.length; i++) {
+			var userChoice = $("<div>");
+			userChoice.addClass("user-guess");
+			userChoice.html(pick.choice[i]);
+			userChoice.attr("data-guessvalue", i);
+			$("#answerblock").append(userChoice);
+			pick.shown = true;		
+		}
+	}
+
+	runTimer();
+}
 
 
-runTimer();
+$(".user-guess").on("click", function () {
+	userGuess = $(this).attr("data-guessvalue");
+	console.log(userGuess);
+})
+
+function checkOver() {
+
+}
+
+
+})
