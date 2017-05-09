@@ -51,58 +51,92 @@ var options = [
 
 var correctCount = 0;
 var wrongCount = 0;
-var timer = 10;
-var intervalID;
+var unanswerCount = 0;
+var timer = 20;
+var intervalId;
 var userGuess ="";
+var running = false;
 
 //click start button to start game
 $("#start").on("click", function () {
 		$("#start").hide();
 		displayQuestion();
 	})
-//timer function
+//timer start
 function runTimer(){
-	intervalID = setInterval(function () {
-		timer --;
-		$("#timeleft").html("<h3>Time remaining: " + timer + "</h3>");
-		//stop timer if reach 0
-		if (timer === 0) {
-		clearInterval(intervalID);
-		}
-		}, 1000)
-	
+	if (!running) {
+	intervalID = setInterval(decrement, 1000); 
+	running = true;
+	}
+}
+//timer countdown
+function decrement() {
+	timer --;
+	$("#timeleft").html("<h3>Time remaining: " + timer + "</h3>");
+	//stop timer if reach 0
+	if (timer === 0) {
+		unanswerCount++;
+		checkOver();
+	}	
 }
 
+//timer stop
+function stop() {
+	running = false;
+	clearInterval(intervalId);
+}
 //randomly pick question in array if not already shown
 //display question and loop though and display possible answers
 function displayQuestion() {
+	//generate random index in array
 	var pick = options[Math.floor(Math.random()*options.length)]
+	console.log(pick);
 	if (pick.shown) {
+		//recursive to continue to generate new index until one is chosen that has not shown in this game yet
 		displayQuestion();
 	} else {
+		//iterate through answer array and display
 		$("#questionblock").html("<h2>" + pick.question + "</h2>");
 		for(var i = 0; i < pick.choice.length; i++) {
 			var userChoice = $("<div>");
-			userChoice.addClass("user-guess");
+			userChoice.addClass("answerchoice");
 			userChoice.html(pick.choice[i]);
+			//assign array position to it so can check answer
 			userChoice.attr("data-guessvalue", i);
 			$("#answerblock").append(userChoice);
+			//show that this question has been picked before
 			pick.shown = true;		
 		}
 	}
 
-	runTimer();
-}
-
-
-$(".user-guess").on("click", function () {
-	userGuess = $(this).attr("data-guessvalue");
-	console.log(userGuess);
+//click function to select answer and outcomes
+$(".answerchoice").on("click", function () {
+	//grab array position from userGuess
+	userGuess = parseInt($(this).attr("data-guessvalue"));
+	//correct guess or wrong guess outcomes
+	if (userGuess === pick.answer) {
+		timer=20;
+		correctCount++;
+		checkOver();
+	} else {
+		timer=20;
+		wrongCount++;
+		checkOver();
+	}
 })
 
-function checkOver() {
-
 }
 
+
+function checkOver() {
+	if (unanswerCount + correctCount + wrongCount === options.length) {
+		
+
+	} else {
+		$(".answerchoice").remove();
+		displayQuestion();
+	}
+
+}
 
 })

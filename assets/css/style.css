@@ -1,5 +1,33 @@
-.user-guess {
+.answerchoice {
 	border: 5px solid red;
+	width: 50%;
 	color: white;
 	background-color: red;
+
+}
+
+body {
+  background-image: url("../images/foodbg.jpg");
+  background-size: cover;
+}
+
+h1 {
+  text-align: center;
+  color: white;
+  font-weight: bolder;
+  padding: 20px;
+}
+
+.wrapper {
+  margin: 10px auto;
+  background-color: white;
+  border: 2px solid #403fd3;
+  height: 400px;
+  width: 60%;
+  text-align: center;
+}
+
+.btn {
+  position: relative;
+  bottom: -150px;
 }
