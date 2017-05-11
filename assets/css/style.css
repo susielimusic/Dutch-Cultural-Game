@@ -1,14 +1,31 @@
 .answerchoice {
-	border: 5px solid red;
-	width: 50%;
-	color: white;
-	background-color: red;
+	border: 1px solid black;
+  border-radius: 5%;
+	width: 40%;
+	color: black;
+  text-align: center;
+  margin: 10px auto;
+  font-size: 20px;
 
+}
+
+#answerblock {
+  text-align: center;
+
+}
+
+#questionblock {
+  text-align: center;
+}
+
+#reset {
+  visibility: hidden;
 }
 
 body {
   background-image: url("../images/foodbg.jpg");
   background-size: cover;
+  font-family: 'Karla', sans-serif;
 }
 
 h1 {
