@@ -60,13 +60,19 @@ var qCount = options.length;
 var pick;
 var index;
 var newArray = [];
+var holder = [];
 
 
+
+$("#reset").hide();
 //click start button to start game
 $("#start").on("click", function () {
 		$("#start").hide();
 		displayQuestion();
 		runTimer();
+		for(var i = 0; i < options.length; i++) {
+	holder.push(options[i]);
+}
 	})
 //timer start
 function runTimer(){
@@ -100,8 +106,7 @@ function displayQuestion() {
 	//generate random index in array
 	index = Math.floor(Math.random()*options.length);
 	pick = options[index];
-	console.log(pick);
-	
+
 //	if (pick.shown) {
 //		//recursive to continue to generate new index until one is chosen that has not shown in this game yet
 //		displayQuestion();
@@ -149,39 +154,43 @@ function hidepicture () {
 	$("#answerblock").append("<img src=" + pick.photo + ">");
 	newArray.push(pick);
 	options.splice(index,1);
-	console.log(newArray);
-	console.log(options);
-	console.log(qCount);
-	console.log(wrongCount+correctCount+unanswerCount);
+
 	var hidpic = setTimeout(function() {
 		$("#answerblock").empty();
 		timer= 20;
-		runTimer();
-		displayQuestion();
-		checkOver();
-	}, 3000);
-}
 
-function checkOver() {
-	if (wrongCount + correctCount + unanswerCount === qCount) {
+	//run the score screen if all questions answered
+	if ((wrongCount + correctCount + unanswerCount) === qCount) {
 		$("#questionblock").empty();
 		$("#questionblock").html("<h3>Game Over!  Here's how you did: </h3>");
-		$("#answerblock").html("<h4> Correct: " + correctCount + "</h4>" );
-		$("#answerblock").html("<h4> Incorrect: " + wrongCount + "</h4>" );
-		$("#answerblock").html("<h4> Unanswered: " + unanswerCount + "</h4>" );
-		$("#reset").css("{visibility: visible}");
+		$("#answerblock").append("<h4> Correct: " + correctCount + "</h4>" );
+		$("#answerblock").append("<h4> Incorrect: " + wrongCount + "</h4>" );
+		$("#answerblock").append("<h4> Unanswered: " + unanswerCount + "</h4>" );
+		$("#reset").show();
+		correctCount = 0;
+		wrongCount = 0;
+		unanswerCount = 0;
 
-	} 
+	} else {
+		runTimer();
+		displayQuestion();
+
+	}
+	}, 3000);
+
+
 }
 
-$("#reset").on("click", function () {
-	$("#reset").css("{visibility: hidden}");
-	$("#answerblock #questionblock").empty();
-	correctCount = 0;
-	wrongCount = 0;
-	unanswerCount = 0;
-	displayQuestion();
+$("#reset").on("click", function() {
+	$("#reset").hide();
+	$("#answerblock").empty();
+	$("#questionblock").empty();
+	for(var i = 0; i < holder.length; i++) {
+		options.push(holder[i]);
+	}
 	runTimer();
+	displayQuestion();
+
 })
 
 })
