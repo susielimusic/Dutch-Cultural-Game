@@ -1,53 +1,89 @@
+
+//welcome the user
+alert("Welcome to test your CQ of the Netherlands!");
+
+// view.hide(view.form);
+
+function random(a, b, callback) {
+
+    if (b === undefined) {
+        // if only one argument is supplied, assume the lower limit is 1!
+        b = a, a = 1;
+    }
+    var result = Math.floor((b - a + 1) * Math.random()) + a;
+
+    if (typeof callback === "function") {
+        result = callback(result);
+    }
+
+    return result;
+
+}
+
+//questions 
 $(document).ready(function () {
+
 var options = [
 	{
-		question: "Pupusas, handmade thick stuffed corn tortillas, are a traditional dish from what country?", 
-		choice: ["Ethiopia", "El Salvadore", "Peru", "Guatamala"],
+		question: "Which month is the Tulip season?", 
+		choice: ["December", "May", "August", "October"],
 		answer: 1,
-		photo: "assets/images/pupusas.jpg"
+		photo: "assets/images/tulips.jpg"
+	 },
+	{
+		question: "Where does Sinterklaas originate from?", 
+		choice: ["North Pole", "Span", "Latvia", "Turkey"],
+		answer: 1,
+		photo: "assets/images/Sinterklaas.jpg"
+	 },
+	{
+		question: "Why does the Dutch soccer team wear orange?", 
+		choice: ["Symbol of the fruit of orange", "The Dutch royal color", "Symbol of orange jucie", "King's favorite color"],
+		answer: 1,
+		photo: "assets/images/football.jpg"
 	 },
 	 {
-	 	question: "What popular soda beverage was originally developed as a mixer for whiskey?", 
-		choice: ["Mountain Dew", "Sprite", "7-UP", "Coke"],
+	 	question: "What is the name of the winner of the EuroVision song contest 2019?", 
+		choice: ["Duncan", "David", "Dirk", " Adrianus"],
 		answer: 0,
-		photo: "assets/images/mtdew.gif"
-	 }, 
-	 {
-	 	question: "Kopi luwak is a very expensive type of what?", 
-		choice: ["Spice", "Caviar", "Coffee", "Rice variety" ],
-		answer: 2,
-		photo: "assets/images/coffee.gif"
-	}, 
-	{
-		question: "Which is not an ingredient in a Harvey Wallbanger cocktail?", 
-		choice: ["Orange Juice", "Vodka", "Sour Mix", "Galliano" ],
-		answer: 2,
-		photo: "assets/images/harvey.jpg"
-	}, 
-	{
-		question: "How many items are there in a Bakers' Dozen?", 
-		choice: ["12", "6", "24", "13" ],
-		answer: 3,
-		photo: "assets/images/dozen.jpg"
-	}, 
-	{
-		question: "What is the most widely eaten fish in the world?", 
-		choice: ["Tilapia", "Herring", "Sardine", "Tuna" ],
-		answer: 1,
-		photo: "assets/images/herring.jpg"
-	}, 
-	{
-		question: "Which fruit does not ripen once it has been picked?", 
-		choice: ["Banana", "Lemon", "Mango", "Apple" ],
-		answer: 1,
-		photo: "assets/images/lemon.gif"
-	}, 
-	{
-		question: "Which fruit contains the most protein per 100 calories?", 
-		choice: ["Guava", "Avocado", "Banana", "Blackberries" ],
-		answer: 0,
-		photo: "assets/images/guava.gif"
-	}];
+		photo: "assets/images/Duncan.jpg"
+	 }];
+	//  {
+	//  	question: "How many people in the world speak Dutch?", 
+	// 	choice: ["5 million", "12 million", "28 million", "55 million" ],
+	// 	answer: 2,
+	// 	photo: "assets/images/language.jpg"
+	// }, 
+	// {
+	// 	question: "Which brand of beer is Dutch?", 
+	// 	choice: ["Corona", "Calsberg", "Heineken", "Tsingtao" ],
+	// 	answer: 2,
+	// 	photo: "assets/images/beers.jpg"
+	// }, 
+	// {
+	// 	question: "How many provinces does the Netherlands have?", 
+	// 	choice: ["10", "11", "12", "13" ],
+	// 	answer: 2,
+	// 	photo: "assets/images/proviences.jpg"
+	// }, 
+	// {
+	// 	question: "What is the most widely eaten fish in the Netherlands?", 
+	// 	choice: ["Tilapia", "Herring", "Sardine", "Tuna" ],
+	// 	answer: 1,
+	// 	photo: "assets/images/herring.jpg"
+	// }, 
+	// {
+	// 	question: "What city is famous for its porcelain in Holland?", 
+	// 	choice: ["Amsterdam", "Delft", "Rotterdam", "Den Haag" ],
+	// 	answer: 1,
+	// 	photo: "assets/images/delftblue.jpg"
+	// }, 
+	// {
+	// 	question: "How tall is Dutch males in avarage?", 
+	// 	choice: ["175", "180", "185", "190" ],
+	// 	answer: 2,
+	// 	photo: "assets/images/tall.jpg"
+	// }];
 
 var correctCount = 0;
 var wrongCount = 0;
@@ -64,10 +100,11 @@ var holder = [];
 
 
 
-$("#reset").hide();
+$("#btn-reset").hide();
 //click start button to start game
-$("#start").on("click", function () {
-		$("#start").hide();
+$("#btn-start").on("click", function () {
+		$("#btn-start").hide();
+		$("#frontline").hide();
 		displayQuestion();
 		runTimer();
 		for(var i = 0; i < options.length; i++) {
@@ -124,8 +161,6 @@ function displayQuestion() {
 //		}
 }
 
-
-
 //click function to select answer and outcomes
 $(".answerchoice").on("click", function () {
 	//grab array position from userGuess
@@ -136,7 +171,7 @@ $(".answerchoice").on("click", function () {
 		stop();
 		correctCount++;
 		userGuess="";
-		$("#answerblock").html("<p>Correct!</p>");
+		$("#answerblock").html(`<p style="color:red; font-size:20px">Correct!</p>`);
 		hidepicture();
 
 	} else {
@@ -149,7 +184,6 @@ $(".answerchoice").on("click", function () {
 })
 }
 
-
 function hidepicture () {
 	$("#answerblock").append("<img src=" + pick.photo + ">");
 	newArray.push(pick);
@@ -161,15 +195,22 @@ function hidepicture () {
 
 	//run the score screen if all questions answered
 	if ((wrongCount + correctCount + unanswerCount) === qCount) {
+		document.createElement("div")
 		$("#questionblock").empty();
 		$("#questionblock").html("<h3>Game Over!  Here's how you did: </h3>");
-		$("#answerblock").append("<h4> Correct: " + correctCount + "</h4>" );
-		$("#answerblock").append("<h4> Incorrect: " + wrongCount + "</h4>" );
-		$("#answerblock").append("<h4> Unanswered: " + unanswerCount + "</h4>" );
-		$("#reset").show();
+		$("#answerblock").append("<h4> Correct: " + correctCount + "</h4>");
+		$('#answerblock').append('<img src="./assets/images/correct.jpg"/>')
+		$("#answerblock").append("<h4> Incorrect: " + wrongCount + "</h4>");
+		$('#answerblock').append('<img src="./assets/images/incorrect.jpg"/>')
+		// $("#answerblock").append("<h4> Unanswered: " + unanswerCount + "</h4>");
+		$("#btn-reset").show();
 		correctCount = 0;
 		wrongCount = 0;
 		unanswerCount = 0;
+		
+		$("#answerblock").css({
+			display: "flex"
+		})
 
 	} else {
 		runTimer();
@@ -177,12 +218,10 @@ function hidepicture () {
 
 	}
 	}, 3000);
-
-
 }
 
-$("#reset").on("click", function() {
-	$("#reset").hide();
+$("#btn-reset").on("click", function() {
+	$("#btn-reset").hide();
 	$("#answerblock").empty();
 	$("#questionblock").empty();
 	for(var i = 0; i < holder.length; i++) {
@@ -190,7 +229,5 @@ $("#reset").on("click", function() {
 	}
 	runTimer();
 	displayQuestion();
-
 })
-
 })
