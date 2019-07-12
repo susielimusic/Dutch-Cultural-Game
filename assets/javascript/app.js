@@ -229,5 +229,5 @@ $("#btn-reset").on("click", function() {
 	}
 	runTimer();
 	displayQuestion();
+	})
 })
-
