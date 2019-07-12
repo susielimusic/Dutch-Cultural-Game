@@ -1,6 +1,6 @@
 
-//welcome the user
-alert("Welcome to test your CQ of the Netherlands!");
+// //welcome the user
+// alert("Welcome to test your CQ of the Netherlands!");
 
 // view.hide(view.form);
 
@@ -47,43 +47,43 @@ var options = [
 		choice: ["Duncan", "David", "Dirk", " Adrianus"],
 		answer: 0,
 		photo: "assets/images/Duncan.jpg"
-	 }];
-	//  {
-	//  	question: "How many people in the world speak Dutch?", 
-	// 	choice: ["5 million", "12 million", "28 million", "55 million" ],
-	// 	answer: 2,
-	// 	photo: "assets/images/language.jpg"
-	// }, 
-	// {
-	// 	question: "Which brand of beer is Dutch?", 
-	// 	choice: ["Corona", "Calsberg", "Heineken", "Tsingtao" ],
-	// 	answer: 2,
-	// 	photo: "assets/images/beers.jpg"
-	// }, 
-	// {
-	// 	question: "How many provinces does the Netherlands have?", 
-	// 	choice: ["10", "11", "12", "13" ],
-	// 	answer: 2,
-	// 	photo: "assets/images/proviences.jpg"
-	// }, 
-	// {
-	// 	question: "What is the most widely eaten fish in the Netherlands?", 
-	// 	choice: ["Tilapia", "Herring", "Sardine", "Tuna" ],
-	// 	answer: 1,
-	// 	photo: "assets/images/herring.jpg"
-	// }, 
-	// {
-	// 	question: "What city is famous for its porcelain in Holland?", 
-	// 	choice: ["Amsterdam", "Delft", "Rotterdam", "Den Haag" ],
-	// 	answer: 1,
-	// 	photo: "assets/images/delftblue.jpg"
-	// }, 
-	// {
-	// 	question: "How tall is Dutch males in avarage?", 
-	// 	choice: ["175", "180", "185", "190" ],
-	// 	answer: 2,
-	// 	photo: "assets/images/tall.jpg"
-	// }];
+	 },
+	 {
+		question: "How many people in the world speak Dutch?", 
+		choice: ["5 million", "12 million", "28 million", "55 million" ],
+		answer: 2,
+		photo: "assets/images/language.jpg"
+	}, 
+	{
+		question: "Which brand of beer is Dutch?", 
+		choice: ["Corona", "Calsberg", "Heineken", "Tsingtao" ],
+		answer: 2,
+		photo: "assets/images/beers.jpg"
+	}, 
+	{
+		question: "How many provinces does the Netherlands have?", 
+		choice: ["10", "11", "12", "13" ],
+		answer: 2,
+		photo: "assets/images/proviences.jpg"
+	}, 
+	{
+		question: "What is the most widely eaten fish in the Netherlands?", 
+		choice: ["Tilapia", "Herring", "Sardine", "Tuna" ],
+		answer: 1,
+		photo: "assets/images/herring.jpg"
+	}, 
+	{
+		question: "What city is famous for its porcelain in Holland?", 
+		choice: ["Amsterdam", "Delft", "Rotterdam", "Den Haag" ],
+		answer: 1,
+		photo: "assets/images/delftblue.jpg"
+	}, 
+	{
+		question: "How tall is Dutch males in avarage?", 
+		choice: ["175", "180", "185", "190" ],
+		answer: 2,
+		photo: "assets/images/tall.jpg"
+	}];
 
 var correctCount = 0;
 var wrongCount = 0;
@@ -144,11 +144,11 @@ function displayQuestion() {
 	index = Math.floor(Math.random()*options.length);
 	pick = options[index];
 
-//	if (pick.shown) {
-//		//recursive to continue to generate new index until one is chosen that has not shown in this game yet
-//		displayQuestion();
-//	} else {
-//		console.log(pick.question);
+	if (pick.shown) {
+		//recursive to continue to generate new index until one is chosen that has not shown in this game yet
+		displayQuestion();
+	} else {
+		console.log(pick.question);
 		//iterate through answer array and display
 		$("#questionblock").html("<h2>" + pick.question + "</h2>");
 		for(var i = 0; i < pick.choice.length; i++) {
@@ -230,4 +230,4 @@ $("#btn-reset").on("click", function() {
 	runTimer();
 	displayQuestion();
 })
-})
+
