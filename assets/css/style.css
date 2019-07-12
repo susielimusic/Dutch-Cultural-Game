@@ -18,7 +18,7 @@
 }
 
 img {
-  max-height: 150px;
+  max-height: 155px;
   width: auto;
 }
 
@@ -71,9 +71,21 @@ h2, h4 {
   text-align: center;
 }
 
-.btn btn-start {
+.btn .btn-starts {
   position: relative;
+  top:30%;
   bottom: -150px;
   color: red;
+} 
+.img{
+  width:60px;
+}
+.btn-starts >span{
+  text-align: center;
+}
 
+.btn-resets{
+  position: absolute;
+  top:70%;
+left:45%;
 }

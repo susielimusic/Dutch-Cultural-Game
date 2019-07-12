@@ -88,7 +88,7 @@ var options = [
 var correctCount = 0;
 var wrongCount = 0;
 var unanswerCount = 0;
-var timer = 20;
+var timer = 5;
 var intervalId;
 var userGuess ="";
 var running = false;
@@ -191,7 +191,7 @@ function hidepicture () {
 
 	var hidpic = setTimeout(function() {
 		$("#answerblock").empty();
-		timer= 20;
+		timer= 5;
 
 	//run the score screen if all questions answered
 	if ((wrongCount + correctCount + unanswerCount) === qCount) {
