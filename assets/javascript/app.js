@@ -1,6 +1,6 @@
 
 // //welcome the user
-// alert("Welcome to test your CQ of the Netherlands!");
+alert("Welcome to test your CQ of the Netherlands!");
 
 // view.hide(view.form);
 
@@ -158,7 +158,7 @@ function displayQuestion() {
 			//assign array position to it so can check answer
 			userChoice.attr("data-guessvalue", i);
 			$("#answerblock").append(userChoice);
-//		}
+		}
 }
 
 //click function to select answer and outcomes
